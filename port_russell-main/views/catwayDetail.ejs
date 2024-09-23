@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Catway Details</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <h1>Catway Details</h1>
+  <p>ID: <%= catway._id %></p>
+  <p>Number: <%= catway.catwayNumber %></p>
+  <p>Type: <%= catway.type %></p>
+  <p>State: <%= catway.catwayState %></p>
+
+  <!-- Formulaire pour mettre à jour la description de l'état du catway -->
+  <form action="/dashboard/catways/<%= catway._id %>?_method=PATCH" method="post">
+    <h3>Mettre à jour l'état du catway</h3>
+    <input type="text" name="catwayState" value="<%= catway.catwayState %>" required>
+    <button type="submit">Mettre à jour</button>
+  </form>
+
+  <a href="/dashboard">Retour au tableau de bord</a>
+</body>
+</html>

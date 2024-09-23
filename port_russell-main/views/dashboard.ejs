@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    
+  </head>
+  <body>
+    <main>
+      <h1>Tableau de bord de <%= user.username %></h1>
+      <section>
+        <h2>Utilisateur:</h2>
+        <fieldset>
+          <h3>Modifier ou supprimer un utilisateur</h3>
+
+          <form action="/dashboard/user/<%= user._id %>?_method=PUT" method="POST">
+            <label for="username">Nom complet:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value="<%= user.username %>"
+              required
+            />
+            <br />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%= user.email %>" required />
+            <br />
+            <label for="password">Nouveau Mot de passe:</label>
+            <input type="password" id="password" name="password" value="password" required />
+            <br />
+            <button type="submit">Modifier</button>
+          </form>
+
+          <form action="/dashboard/delete-profile/<%= user._id %>?_method=DELETE" method="POST">
+            <button type="submit">Supprimer le Profil</button>
+          </form>
+
+        </fieldset>
+
+        <fieldset>
+          <h3>Créer un utilisateur</h3>
+          <form action="/register" method="POST">
+            <div class="form-outline">
+              <label class="form-label" for="form3Example2">Nom complet:</label>
+              <input type="text" name="username" id="form3Example2" required />
+            </div>
+      
+            <!-- Email input -->
+            <div>
+              <label class="form-label" for="form3Example3">Adresse mail:</label>
+              <input type="email" name="email" id="form3Example3" required />
+            </div>
+      
+            <!-- Password input -->
+            <div>
+              <label class="form-label" for="form3Example4">Mot de passe:</label>
+              <input type="password" name="password" id="form3Example4" required />
+            </div>
+      
+            <!-- Submit button -->
+            <button type="submit">Créer</button>
+      
+          </form>
+        </fieldset>
+      </section>
+
+      <section>
+        <h2>Catway:</h2>
+        <!-- Formulaire pour créer un catway -->
+        <fieldset>
+          <h3>Créer un Catway</h3>
+          <form action="/dashboard/catways" method="POST">
+            <label for="catwayNumber">Numéro de catway</label>
+            <input type="text" name="catwayNumber" id="catwayNumber" required />
+
+            <label for="type">Type de catway</label>
+            <select name="type" id="type" required>
+              <option value="long">Long</option>
+              <option value="court">Court</option>
+            </select>
+
+            <label for="catwayState">Etat du catway</label>
+            <input type="text" name="catwayState" id="catwayState" required />
+
+            <button type="submit">Créer un catway</button>
+          </form>
+        </fieldset>
+
+        <fieldset>
+          <!-- Formulaire pour récupérer les détails d'un catway -->
+          <form action="/dashboard/catways/:id" method="get">
+            <h3>Detail d'un catway, modification</h3>
+            <input type="text" name="catwayNumber" placeholder="Numéro du catway" required />
+            <button type="submit">Récupérer</button>
+          </form>
+        </fieldset>
+
+        <fieldset>
+          <!-- Formulaire pour supprimer un catway -->
+          <form action="/dashboard/catways/:id?_method=DELETE" method="post">
+            <h3>supprimer un catway</h3>
+            <input type="text" name="catwayNumber" placeholder="Catway ID" required />
+            <button type="submit">Supprimer</button>
+          </form>
+
+        </fieldset>
+
+        <a href="/dashboard/catways">Liste des catways</a>
+      </section>
+
+      <section>
+        <h3>Réservation:</h3>
+        <fieldset>
+          <!-- formulaire de reservation d'un catway -->
+          <h3>Réserver un catway</h3>
+          <form action="dashboard/catways/:id/reservations" method="POST">
+            <label for="catwayNumber">Numéro de catway</label>
+            <select name="catwayNumber" id="catwayNumber" required>
+              <% catways.forEach(catway => { %>
+                <option value="<%= catway.catwayNumber %>"><%= catway.catwayNumber %> - <%= catway.type %></option>
+              <% }) %>
+            </select>
+  
+            <label for="clientName">Nom du client</label>
+            <input type="text" name="clientName" id="clientName" required />
+  
+            <label for="boatName">Nom du bateau</label>
+            <input type="text" name="boatName" id="boatName" required />
+  
+            <label for="checkIn">Date de début</label>
+            <input type="date" name="checkIn" id="checkIn" required />
+  
+            <label for="checkOut">Date de fin</label>
+            <input type="date" name="checkOut" id="checkOut" required />
+  
+            <button type="submit">Réserver</button>
+          </form>
+        </fieldset>
+
+        <fieldset>
+          <!-- Formulaire pour récupérer les détails de réservations d'un catway -->
+          <form action="/dashboard/catways/:id/reservations" method="get">
+            <h3>Detail des reservation pour un catway</h3>
+            <input type="text" name="catwayNumber" placeholder="Numéro du catway" required />
+            <button type="submit">Récupérer</button>
+          </form>
+        </fieldset>
+
+        <fieldset>
+          <!-- Formulaire pour récupérer le détail d'une réservation d'un catway -->
+          <form action="/dashboard/catways/:id/reservations/:idReservation" method="get">
+            <h3>Détails d'une réservation pour un catway</h3>
+            <label for="catwayNumber">Numéro du catway</label>
+            <input type="text" name="catwayNumber" id="catwayNumber" placeholder="Numéro du catway" required /> <br>
+            
+            <label for="idReservation">ID de la réservation</label>
+            <input type="text" name="idReservation" id="idReservation" placeholder="ID de la réservation" required /> <br>
+                        
+            <button type="submit">Récupérer</button>
+          </form>
+        </fieldset>
+
+        <fieldset>
+          <!-- Formulaire pour récupérer le détail d'une réservation d'un catway -->
+          <form action="/dashboard/catways/:id/reservations/:idReservation?_method=DELETE" method="POST">
+            <h3>Supprimer d'une réservation pour un catway</h3>
+            <label for="catwayNumber">Numéro du catway</label>
+            <input type="text" name="catwayNumber" id="catwayNumber" placeholder="Numéro du catway" required /> <br>
+            
+            <label for="idReservation">ID de la réservation</label>
+            <input type="text" name="idReservation" id="idReservation" placeholder="ID de la réservation" required /> <br>
+                        
+            <button type="submit">Supprimer</button>
+          </form>
+        </fieldset>
+
+        <a href="/dashboard/reservations">reservation</a>
+
+      </section>
+
+    </main>
+  </body>
+</html>

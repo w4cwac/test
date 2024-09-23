@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des reservations</title>
+</head>
+<body>
+    <main>
+        <h1>Liste des reservations</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id de la reservation</th>
+                    <th>Numéro de catway</th>
+                    <th>Nom du client</th>
+                    <th>Nom du bateau</th>
+                    <th>Réserver à partir de: </th>
+                    <th>Réserver jusqu'au :</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% reservations.forEach(reservation => { %>
+                  <tr>
+                    <td><%= reservation._id %></td>
+                    <td><%= reservation.catwayNumber %></td>
+                    <td><%= reservation.clientName %></td>
+                    <td><%= reservation.boatName %></td>
+                    <td><%= reservation.checkIn.toLocaleDateString('fr-FR') %></td>
+                    <td><%= reservation.checkOut.toLocaleDateString('fr-FR') %></td>
+                  </tr>
+                <% }); %>
+        </table>
+
+    <a href="/dashboard">Retour au tableau de bord</a>
+    </main>
+    
+</body>
+</html>

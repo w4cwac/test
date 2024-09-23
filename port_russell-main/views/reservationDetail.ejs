@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails de la Réservation</title>
+</head>
+<body>
+  <h1>Détails de la Réservation pour Catway <%= catway.catwayNumber %></h1>
+  <p><strong>Numéro de catway:</strong> <%= catway.catwayNumber %></p>
+  <p><strong>Type de catway:</strong> <%= catway.type %></p>
+  <p><strong>Nom du client:</strong> <%= reservation.clientName %></p>
+  <p><strong>Nom du bateau:</strong> <%= reservation.boatName %></p>
+  <p><strong>Réservé du</strong> <%= reservation.checkIn.toLocaleDateString('fr-FR') %> <strong> jusqu'au </strong> <%= reservation.checkOut.toLocaleDateString('fr-FR') %> </strong></p>
+  <a href="/dashboard">Retour au tableau de bord</a>
+</body>
+</html>

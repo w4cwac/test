@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+</head>
+<body>
+    <h1>Page d'accueil</h1>
+    <p>Cette application sert à la gestion des réservation de catway du port de plaisance de Russell.</p>
+    
+    <h2>Login</h2>
+    <form action="/login" method="POST">
+
+        <!-- Email input -->
+        <div >
+          <label class="form-label" for="form3Example3">Adresse mail:</label>
+          <input type="email" name="email" id="form3Example3"  />
+        </div>
+
+        <!-- Password input -->
+        <div>
+          <label class="form-label" for="form3Example4">Mot de passe:</label>
+          <input type="password" name="password"  />
+        </div>
+
+
+        <!-- Submit button -->
+        <button type="submit">
+          Connexion
+        </button>
+
+      </form>
+
+      <p>Pour voir la documentation de l'Api cliquez <a href="/api-docs">ici</a></p>
+</body>
+</html>
